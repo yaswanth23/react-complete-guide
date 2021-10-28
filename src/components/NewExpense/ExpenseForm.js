@@ -6,8 +6,24 @@ const ExpenseForm = () => {
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
 
+  const [userInput, setUserInput] = useState({
+    enteredTitle: "",
+    enteredAmount: "",
+    enteredDate: "",
+  });
+
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
+    /* one approach to handle multiple states */
+    // setUserInput({
+    //   ...userInput,
+    //   enteredTitle: event.target.value,
+    // });
+
+    /* second approach to handle multiple states and efficient one */
+    // setUserInput((prevState) => {
+    //   return {...prevState, enteredTitle: event.target.value};
+    // });
   };
 
   const amountChangeHandler = (event) => {
