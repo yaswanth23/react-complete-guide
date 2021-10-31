@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Expenses.css";
-import ExpeseItem from "./ExpenseItem";
 import ExpensesFilter from "./ExpensesFilter";
+import ExpensesList from "./ExpensesList";
 
 function Expenses(props) {
   const [filteredYear, setFilteredYear] = useState("2021");
@@ -13,27 +13,10 @@ function Expenses(props) {
     return expense.date.getFullYear().toString() === filteredYear;
   });
 
-  let errorMessage = (
-    <p style={{ color: "#a892ee", margin: "1rem" }}>No Expenses Found.</p>
-  );
-
   return (
     <div className="expenses">
       <ExpensesFilter selected={filteredYear} onGetYear={onGetYearHandler} />
-      <div>
-        {filteredExpense.length === 0
-          ? errorMessage
-          : filteredExpense.map((item) => {
-              return (
-                <ExpeseItem
-                  key={item.id}
-                  title={item.title}
-                  date={item.date}
-                  amount={item.amount}
-                />
-              );
-            })}
-      </div>
+      <ExpensesList items={filteredExpense} />
     </div>
   );
 }
